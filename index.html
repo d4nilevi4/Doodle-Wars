@@ -80,7 +80,6 @@
         // Avoid draining fillrate performance on mobile devices,
         // and default/override low DPI mode on mobile browsers.
         config.devicePixelRatio = 1;
-        unityShowBanner('WebGL builds are not supported on mobile devices.');
       } else {
         canvas.style.width = "960px";
         canvas.style.height = "600px";
@@ -103,5 +102,11 @@
       };
       document.body.appendChild(script);
     </script>
+
+    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+    <script>
+  		vkBridge.send("VKWebAppInit", {});
+	</script>
+
   </body>
 </html>
