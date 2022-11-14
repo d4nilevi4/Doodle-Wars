@@ -80,7 +80,6 @@
         // Avoid draining fillrate performance on mobile devices,
         // and default/override low DPI mode on mobile browsers.
         config.devicePixelRatio = 1;
-        unityShowBanner('WebGL builds are not supported on mobile devices.');
       } else {
         canvas.style.width = "960px";
         canvas.style.height = "600px";
@@ -123,6 +122,7 @@
 
   		function getUserData(){
   			vkBridge.send("VKWebAppStorageGet",{"keys":["_save"]}).then(data =>{
+  				console.log('Score');
   				console.log(data);
   				unityI.SendMessage('VKSDK', 'DataGetting', JSON.stringify(data));
   			});
