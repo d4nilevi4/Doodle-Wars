@@ -93,7 +93,7 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
-        	unityI = unityInstance;
+          unityI = unityInstance;
           loadingBar.style.display = "none";
           fullscreenButton.onclick = () => {
             unityInstance.SetFullscreen(1);
@@ -109,54 +109,60 @@
 
     <script type="text/javascript">
 
-  		vkBridge.send('VKWebAppInit');
+      vkBridge.send('VKWebAppInit');
 
 
 
-  		function auth(){
-  			vkBridge.send('VKWebAppGetUserInfo').then(_info => {
-  				console.log(_info);
-  				unityI.SendMessage('VKSDK', 'AuthenticateSuccess', JSON.stringify(_info));
-  			});
-  		}
+      function auth(){
+        vkBridge.send('VKWebAppGetUserInfo').then(_info => {
+          console.log(_info);
+          unityI.SendMessage('VKSDK', 'AuthenticateSuccess', JSON.stringify(_info));
+        });
+      }
 
-  		function getUserData(){
-  			vkBridge.send("VKWebAppStorageGet",{"keys":["_save"]}).then(data =>{
-  				console.log('Score');
-  				console.log(data);
-  				unityI.SendMessage('VKSDK', 'DataGetting', JSON.stringify(data));
-  			});
-  		}
+      function getUserData(){
+        vkBridge.send("VKWebAppStorageGet",{"keys":["_save"]}).then(data =>{
+          console.log('Score');
+          console.log(data);
+          unityI.SendMessage('VKSDK', 'DataGetting', JSON.stringify(data));
+        });
+      }
 
-  		function setUserData(data){
-  			console.log(data);
-  			vkBridge.send("VKWebAppStorageSet", {"key": "_save", "value": data}).then(_info =>{
-  				console.log("Data Saved!");
-  			});
-  		}
+      function setUserData(data){
+        console.log(data);
+        vkBridge.send("VKWebAppStorageSet", {"key": "_save", "value": data}).then(_info =>{
+          console.log("Data Saved!");
+        });
+      }
 
-  		function showFullscrenAd(){
-  			vkBridge.send('VKWebAppShowNativeAds', {ad_format: 'interstitial'}).then(data => {
-  				if(data.result){
-  					console.log("Interstitial ad was shown success");
-  				} else {
-  					console.log("Interstitial ad was shown with error");
-  				}
-  			});
-  		}
+      function showFullscrenAd(){
+        vkBridge.send('VKWebAppShowNativeAds', {ad_format: 'interstitial'}).then(data => {
+          if(data.result){
+            console.log("Interstitial ad was shown success");
+          } else {
+            console.log("Interstitial ad was shown with error");
+          }
+        });
+      }
 
-  		function showRewardedAd(){
-  			vkBridge.send('VKWebAppShowNativeAds', {ad_format: 'reward'}).then(data => {
-  				if(data.result){
-  					console.log("Reward ad was shown success");
-  					unityI.SendMessage('VKSDK', 'OnRewardGet');
-  				} else {
-  					console.log("Reward ad was shown with error");
-  				}
-  			});
-  		}
+      function showRewardedAd(){
+        vkBridge.send('VKWebAppShowNativeAds', {ad_format: 'reward'}).then(data => {
+          if(data.result){
+            console.log("Reward ad was shown success");
+            unityI.SendMessage('VKSDK', 'OnRewardGet');
+          } else {
+            console.log("Reward ad was shown with error");
+          }
+        });
+      }
 
-	</script>
+      function showLeaderBoard(){
+        vkBridge.send("VKWebAppShowLeaderBoardBox", {user_result:100})
+            .then(data => console.log(data.success))  
+            .catch(error => console.log(error));
+      }
+
+  </script>
 
   </body>
 </html>
