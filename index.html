@@ -156,13 +156,18 @@
         });
       }
 
-      function showLeaderBoard(){
-        vkBridge.send("VKWebAppShowLeaderBoardBox", {user_result:100})
-            .then(data => console.log(data.success))  
-            .catch(error => console.log(error));
+      function appShare(){
+        vkBridge.send('VKWebAppShare', 
+        {
+          link: 'https://vk.com/app51474189'
+        });
       }
 
-    </script>
+      function appAddToFavorites(){
+        vkBridge.send('VKWebAppAddToFavorites');
+      }
+
+  </script>
 
   </body>
 </html>
